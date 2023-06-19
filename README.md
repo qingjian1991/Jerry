@@ -1,2 +1,6 @@
 # Jerry
-create an easy-to-use package.
+I will create an easy-to-use R package.
+
+
+
+
