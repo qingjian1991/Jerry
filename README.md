@@ -1,6 +1,16 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 # Jerry
-I will create an easy-to-use R package, including some functions.
 
+create an easy-to-use package.
 
+## Installation
 
+You can install the development version of MPTevol from
+[GitHub](https://github.com/) with:
 
+``` r
+# install.packages("remotes")
+remotes::install_github("qingjian1991/Jerry")
+```
