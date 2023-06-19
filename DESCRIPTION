@@ -1,0 +1,19 @@
+Package: Jerry
+Type: Package
+Title: Goods functions (Title Case)
+Version: 0.1.0
+Author: Qingjian Chen
+Maintainer: The package maintainer <chenqingjian2010@163.com>
+Description: Some functions frequently used.
+    Use four spaces when indenting paragraphs within the Description.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    tidyverse,
+    R (>= 4.0.1)
+RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

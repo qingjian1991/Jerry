@@ -1,0 +1,87 @@
+---
+title: "easypar"
+author: "Qingjian Chen"
+date: "2021/1/20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## easypar: Running R in batch
+
+The easypar R package allows you to:
+
+Run R functions in a parallel fashion in a trivial way.
+
+1. Easily switch between parallel and serial executions of the same calls (at runtime).
+
+2. Save results of parallel computation as far as they are produced (i.e., cache).
+
+## Install
+
+see: https://github.com/caravagn/easypar
+
+```{r cars} 
+if( !require(easypar) ){
+devtools::install_github("caravagn/easypar")
+}
+```
+
+## Examples:
+
+Make a new function **test**, combined input text and output them.
+
+```{r}
+
+merge_text = function(x){
+  paste0(x, collapse = "_")
+}
+
+
+test = function(i, label1, label2){
+  text = merge_text( c(i, label1, label2))
+  print(text)
+}
+
+label1 = "label1"
+label2 = "lable2"
+
+test(1, label1, label2)
+#"1_label1_lable2"
+```
+
+We store them in a list where each position is a full set of parameters that we want to pass to each calls to f (list of lists), named according to the actual parameter names.
+
+```{r}
+inputs = lapply(1:10, function(x) list(i = x, label1 = label1, label2 = label2) )
+library(easypar)
+
+```
+
+easypar provides a single function that takes as input f, its list of inputs and some execution parameters for the type of execution requested. The simplest call runs f in parallel, without seeing any output and just receiving the return values in a list as follows
+
+#### parameters of easypar::run
+
+***(1) export***: export functions defined by Environment. for examples, function **merge_text** in the examples.
+
+***(2) packages***: the import packages. 
+
+```{r}
+runs = easypar::run(FUN = test, 
+             PARAMS = lapply(1:5, function(x) list(i = x, label1 = label1, label2 = label2) ) ,
+             parallel = TRUE, 
+             outfile = NULL,
+             export = c("merge_text"),
+             packages = "tidyverse",
+             filter_errors = FALSE
+             )
+
+runs
+
+numErrors(runs)
+
+```
+
+

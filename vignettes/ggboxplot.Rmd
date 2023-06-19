@@ -1,0 +1,46 @@
+---
+title: "ggboxplot - add p-value in the boxplot"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ggboxplot - add p-value in the boxplot}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+#### how to add the p value onto basic ggplots.
+
+see reference: https://www.datanovia.com/en/blog/how-to-add-p-values-onto-basic-ggplots/
+
+```{r setup}
+library(Jerry)
+library(ggpubr)
+library(rstatix)
+
+data(signatures)
+
+head(signatures)
+
+#non-params test: wilcox_test
+wilcox.test = signatures  %>%
+  group_by(group) %>%
+  wilcox_test(mutNum ~ sig6) %>%
+  add_xy_position(x = "sig6", fun = "mean_sd" )
+
+signatures %>%
+  ggboxplot(
+            x = "sig6", y = "mutNum", col = "sig6",
+            facet.by = "group", scales = "free",
+            xlab = "signature 6", ylab = "# muts",
+            add = "jitter", add.params = list(width = 0.1, size = 1, shape = 1) ,
+            ggtheme = theme_classic()) +
+  stat_pvalue_manual(wilcox.test, label = "p") +
+  guides(color = "none"  )
+
+
+```
