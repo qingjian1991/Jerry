@@ -142,4 +142,8 @@ gtsummary::tbl_survfit(
 )
 
 
+head(lung)
+surv.list = plot_survival_nominal(lung, variables = "ph.ecog")
+
+
 
