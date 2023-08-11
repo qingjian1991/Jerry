@@ -147,3 +147,35 @@ surv.list = plot_survival_nominal(lung, variables = "ph.ecog")
 
 
 
+library(VSOLassoBag)
+data(ExpressionData)
+set.seed(19084)
+test = VSOLassoBag(ExpressionData = ExpressionData, outcomevariable = "y", bootN = 100, a.family = "gaussian", bagFreq.sigMethod = "CEP", do.plot = TRUE)
+
+
+library(VSOLassoBag)
+data(ExpressionData)
+set.seed(19084)
+test1 = VSOLassoBag(ExpressionData = ExpressionData, outcomevariable = "y", bootN = 100, a.family = "gaussian", bagFreq.sigMethod = "PST", do.plot = TRUE)
+
+
+colData(ExpressionData)
+
+
+test = VSOLassoBag(ExpressionData, c("time","status"), bootN=2,
+            a.family="cox", bagFreq.sigMethod="PST", do.plot = TRUE,
+            plot.freq = "not")
+
+
+test1 = VSOLassoBag(ExpressionData, c("time","status"), bootN=500,
+            a.family="cox",
+            bagFreq.sigMethod="CEP", do.plot = TRUE, plot.freq = "not",
+            post.regression	= T,
+            post.LASSO = T,
+
+
+            )
+
+
+
+

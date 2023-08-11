@@ -13,10 +13,18 @@ ggpoints(
   annotations = c("lm", "cor"),
   linetypes = c("xy.line", "lm.line"),
   cor.method = "spearman",
+  show.cor.pvalue = TRUE,
   label.x.cor = 0.01,
   label.y.cor = 0.9,
   label.x.npc = "right",
-  label.y.npc = "top"
+  label.y.npc = "top",
+  point.pch = 21,
+  point.size = 2,
+  point.fill = "#3b518be5",
+  point.col = "#3b518be5",
+  xy.line.col = "grey50",
+  lm.line.col = "blue",
+  lm.line.size = 1.1
 )
 }
 \arguments{
@@ -39,7 +47,7 @@ ggpoints(
 \item{label.y.npc:}{label.x.npc of lm annotation text}
 }
 \description{
-plot the x and y points using ggplot.
+plot the x and y points using ggplot. The annotations can be correlation coefficient and linear regression function.
 }
 \details{
 The types of annotation:

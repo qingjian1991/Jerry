@@ -1,6 +1,9 @@
 #' ggpoints
 #'
-#' plot the x and y points using ggplot.
+#' plot the x and y points using ggplot. The annotations can be correlation coefficient and linear regression function.
+#'
+#'
+#'
 #' @param data: data frame: if non, using x and y to plot.
 #' @param x: x
 #' @param y: y
@@ -49,8 +52,16 @@ ggpoints = function(data = NULL, x, y, xlab = NULL, ylab = NULL,
                     annotations = c("lm","cor"),
                     linetypes = c("xy.line", "lm.line"),
                     cor.method = "spearman",
+                    show.cor.pvalue = TRUE,
                     label.x.cor = 0.01, label.y.cor = 0.9,
-                    label.x.npc = "right", label.y.npc = "top"
+                    label.x.npc = "right", label.y.npc = "top",
+                    point.pch = 21,
+                    point.size = 2,
+                    point.fill = "#3b518be5",
+                    point.col = "#3b518be5",
+                    xy.line.col = "grey50",
+                    lm.line.col = 'blue',
+                    lm.line.size = 1.1
                     ){
 
   if(is.null(data)){
@@ -63,26 +74,38 @@ ggpoints = function(data = NULL, x, y, xlab = NULL, ylab = NULL,
     data$y = data[,y]
   }
 
-  annotate_text = data %>%
+  annotate_text = data |>
+    filter( !(is.na(x) | is.na(y)) ) |>
     summarise(p.value = (cor.test(x, y, method = cor.method)$p.value ),
               rho = (cor.test(x, y, method = cor.method)$estimate ),
               x.pos = min(x)+ ((max(x)-min(x)) *label.x.cor ),
-              y.pos = min(y)+ ((max(y)-min(y))*label.y.cor )) %>%
-    mutate(text = sprintf('R[sp]~"="~%.2f~","~italic(P)~"="~%.1e', rho, p.value  ) )
+              y.pos = min(y)+ ((max(y)-min(y))*label.y.cor ))
+
+  if(show.cor.pvalue){
+    annotate_text = annotate_text |>
+      mutate(text = sprintf('R[sp]~"="~%.2f~","~italic(P)~"="~%.1e', rho, p.value  ) )
+  }else{
+    annotate_text = annotate_text |>
+      mutate(text = sprintf('R[sp]~"="~%.2f~"', rho  ) )
+  }
+
 
   p1 = data %>%
     ggplot(aes(x = x, y = y ) ) + ggpubr::theme_pubr() +
-    geom_point(pch=21, fill="#3b518be5", size=2)+
+    geom_point(pch=point.pch , fill= point.fill,
+               size= point.size, color = point.col )+
     labs(x = xlab, y = ylab)
 
   if("xy.line" %in% linetypes){
     p1 = p1+
-      geom_abline(slope = 1, intercept = 0, linetype = 2, size = 1.1, col = "grey50")
+      geom_abline(slope = 1, intercept = 0, linetype = 2,
+                  size = 1.1, col = xy.line.col )
   }
 
   if("lm.line" %in% linetypes){
     p1 = p1 +
-      geom_smooth(method = "glm", formula = "y ~ x", se = F, col='blue', linetype = 2, size = 1.1)
+      geom_smooth(method = "glm", formula = "y ~ x", se = F,
+                  col= lm.line.col, linetype = 2, size = lm.line.size)
   }
 
   if("cor" %in% annotations){
@@ -91,9 +114,9 @@ ggpoints = function(data = NULL, x, y, xlab = NULL, ylab = NULL,
   }
 
   if( "lm" %in% annotations){
-    formula = "y ~ x"
+    formula <- y ~ poly(x, 1, raw = TRUE)
     p1 = p1 +
-      stat_poly_eq(aes(label = paste("atop(",..eq.label..,",", ..rr.label.., ")", sep = "")),
+      stat_poly_eq(use_label(c("eq", "adj.R2")) ,
                    label.x.npc = label.x.npc, label.y.npc = label.y.npc,
                    formula = formula, parse = TRUE, size = 4)
 
