@@ -86,7 +86,7 @@ ggpoints = function(data = NULL, x, y, xlab = NULL, ylab = NULL,
       mutate(text = sprintf('R[sp]~"="~%.2f~","~italic(P)~"="~%.1e', rho, p.value  ) )
   }else{
     annotate_text = annotate_text |>
-      mutate(text = sprintf('R[sp]~"="~%.2f~"', rho  ) )
+      mutate(text = sprintf('R[sp] == %.2f', rho  ) )
   }
 
 
