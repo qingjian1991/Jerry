@@ -12,6 +12,8 @@
 #' @param return.data whether return the data frame, Default is FALSE.
 #' @param ... parameters from survminer::ggsurvplot() to control the styles of figures
 #'
+#' @import survminer
+#'
 #'
 #' @examples
 #' library(survival)
@@ -91,7 +93,6 @@ plot_survival_continuous = function(data,
   data$status <- data[[status]]
   data <- dplyr::filter(data, !is.na(.data$time), !is.na(.data$status))
 
-
   #cutoffs: setting the cutoffs for the continuous variables
 
   #see data types.
@@ -156,21 +157,32 @@ plot_survival_continuous = function(data,
 
   names(fit) = variables
 
-  plt = lapply(fit, function(x)
-    survminer::ggsurvplot(x ,
-             data = data,
-             censor = TRUE,
-             risk.table = T,
-             risk.table.height = 0.3,
-             linetype = 1,
-             pval = TRUE,
-             palette = palette,
-             #legend.labs = c("High","Low"),
-             ylab = "Overall Survival (OS)",
-             #conf.int = TRUE, # Add confidence interval
-             ncensor.plot = FALSE,
-             ...
-  )
+  plt = lapply(fit,
+               function(x){
+                 plt.surv = survminer::ggsurvplot(x ,
+                                       data = data,
+                                       censor = TRUE,
+                                       risk.table = T,
+                                       risk.table.height = 0.3,
+                                       linetype = 1,
+                                       pval = TRUE,
+                                       palette = palette,
+                                       #legend.labs = c("High","Low"),
+                                       ylab = "Overall Survival (OS)",
+                                       #conf.int = TRUE, # Add confidence interval
+                                       ncensor.plot = FALSE,
+                                       ...
+                 )
+
+                 patchwork::wrap_plots(
+                   plt.surv$plot,
+                   plt.surv$table,
+                   ncol = 1,
+                   heights = c(1, 0.25)
+                 )
+
+
+    }
   )
 
   names(plt) = variables
