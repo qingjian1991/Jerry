@@ -12,6 +12,7 @@
 #' @param return.data whether return the data frame, Default is FALSE.
 #' @param ... parameters from survminer::ggsurvplot() to control the styles of figures
 #'
+#' @import survminer
 #'
 #' @examples
 #' library(survival)
@@ -55,7 +56,7 @@ plot_survival_nominal = function(data,
 
   names(fit) = variables
 
-  plt = lapply(fit, function(x)
+  plt = lapply(fit, function(x){
     survminer::ggsurvplot(x ,
                           data = data,
                           censor = TRUE,
@@ -70,6 +71,15 @@ plot_survival_nominal = function(data,
                           ncensor.plot = FALSE,
                           ...
     )
+
+    patchwork::wrap_plots(
+      plt.surv$plot,
+      plt.surv$table,
+      ncol = 1,
+      heights = c(1, 0.25)
+    )
+
+  }
   )
 
   names(plt) = variables
