@@ -111,7 +111,7 @@ show_models(mds, drop_controls = TRUE,  merge_models = T)
 tbl_regression(mds$`Surv ~ pat.karno + age + sex` , exp = TRUE)
 
 
-surv.list = plot_survival(
+surv.list = plot_survival_continuous(
   lung |>
     mutate(
       status = recode(status, `1` = 0, `2` = 1),

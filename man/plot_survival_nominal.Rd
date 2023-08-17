@@ -28,13 +28,9 @@ plot_survival_nominal(
 \item{return.data}{whether return the data frame, Default is FALSE.}
 
 \item{...}{parameters from survminer::ggsurvplot() to control the styles of figures}
-
-\item{cutoff}{cutoff methods. cutoff methods is setting either "median", "mean", "best" or the certain values. When the variables is numerical, we divide the variables into two groups according to the inputed values.}
-
-\item{minprop}{Setting minprop values if cutoff methods is "best"}
 }
 \description{
-Plot survival for continuous variables. The continuous variables were divided into high and low groups by setting methods including "median", "mean" or "best".
+Plot survival for nominal variables.
 }
 \examples{
 library(survival)

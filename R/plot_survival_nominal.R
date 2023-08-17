@@ -1,11 +1,9 @@
 #' plot_survival_nominal
 #'
-#' Plot survival for continuous variables. The continuous variables were divided into high and low groups by setting methods including "median", "mean" or "best".
+#' Plot survival for nominal variables.
 #'
 #' @param data the input data.
 #' @param variables the variable to be explored.
-#' @param cutoff cutoff methods. cutoff methods is setting either "median", "mean", "best" or the certain values. When the variables is numerical, we divide the variables into two groups according to the inputed values.
-#' @param minprop Setting minprop values if cutoff methods is "best"
 #' @param time columns names specifying time.
 #' @param status columns names specifying status.
 #' @param palette colors for different groups.
@@ -13,6 +11,7 @@
 #' @param ... parameters from survminer::ggsurvplot() to control the styles of figures
 #'
 #' @import survminer
+#' @import survival
 #'
 #' @examples
 #' library(survival)
@@ -57,7 +56,7 @@ plot_survival_nominal = function(data,
   names(fit) = variables
 
   plt = lapply(fit, function(x){
-    survminer::ggsurvplot(x ,
+    plt.surv = survminer::ggsurvplot(x ,
                           data = data,
                           censor = TRUE,
                           risk.table = T,

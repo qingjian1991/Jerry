@@ -13,6 +13,7 @@
 #' @param ... parameters from survminer::ggsurvplot() to control the styles of figures
 #'
 #' @import survminer
+#' @import survival
 #'
 #'
 #' @examples
