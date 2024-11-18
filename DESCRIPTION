@@ -1,7 +1,7 @@
 Package: Jerry
 Type: Package
 Title: Goods functions (Title Case)
-Version: 0.1.0
+Version: 0.2.0
 Author: Qingjian Chen
 Maintainer: The package maintainer <chenqingjian2010@163.com>
 Description: Some functions frequently used.

@@ -2,8 +2,10 @@
 
 export(ggpoints)
 export(liftOverData)
+export(plot_colors)
 export(plot_survival_continuous)
 export(plot_survival_nominal)
+export(sci_colors)
 export(set.colors)
 import(ggplot2)
 import(ggpmisc)

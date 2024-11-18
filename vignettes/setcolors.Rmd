@@ -1,0 +1,98 @@
+---
+title: "set sci_colors"
+output: html_document
+date: "2024-11-18"
+---
+In this page, we show all the colors in function **sci_colors**.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+### 1) color list1
+```{r, fig.dim = c(8, 1.5)}
+library(Jerry)
+sci_colors(1, plot = T)
+```
+
+### 2) color list2
+```{r, fig.dim = c(8, 1.5)}
+sci_colors(2, plot = T)
+```
+
+### 3) color list3
+```{r, fig.dim = c(8, 1.5)}
+sci_colors(3, plot = T)
+```
+
+### 4) color list4
+```{r, fig.dim = c(8, 1.5)}
+sci_colors(4, plot = T)
+```
+
+### 5) color list5
+```{r, fig.dim = c(8, 1.5)}
+sci_colors(5, plot = T)
+```
+
+
+### 6) color list6
+```{r, fig.dim = c(8, 1.5*2.3)}
+sci_colors(6, plot = T)
+```
+
+
+### 7) color list7
+```{r, fig.dim = c(8, 1.5*2.3)}
+sci_colors(7, plot = T)
+```
+
+
+### 8) color list8
+```{r, fig.dim = c(8, 1.5*2.3)}
+sci_colors(8, plot = T)
+```
+
+
+
+### 9) color list9
+```{r, fig.dim = c(8, 1.5*3)}
+sci_colors(9, plot = T)
+```
+
+
+
+### 10) color list10
+```{r, fig.dim = c(8, 1.5*3)}
+sci_colors(10, plot = T)
+```
+
+
+
+### 11) color list11
+```{r, fig.dim = c(8, 1.5*3)}
+sci_colors(11, plot = T)
+```
+
+
+
+### 12) color list12
+```{r, fig.dim = c(8, 1.5*3)}
+sci_colors(12, plot = T)
+```
+
+
+
+### 13) color list13
+```{r, fig.dim = c(8, 1.5*4)}
+sci_colors(13, plot = T)
+```
+
+
+
+### 14) color list14
+```{r, fig.dim = c(8, 1.5*6)}
+sci_colors(14, plot = T)
+```
+
+
+
