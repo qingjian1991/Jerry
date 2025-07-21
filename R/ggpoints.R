@@ -70,7 +70,7 @@ ggpoints = function(data = NULL, x, y,
       y = y
     )
   }else{
-    data = as.data.frame()
+    data = as.data.frame(data)
     data$x = data[,x]
     data$y = data[,y]
   }
