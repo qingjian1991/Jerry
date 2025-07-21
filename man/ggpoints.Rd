@@ -8,8 +8,6 @@ ggpoints(
   data = NULL,
   x,
   y,
-  xlab = NULL,
-  ylab = NULL,
   annotations = c("lm", "cor"),
   linetypes = c("xy.line", "lm.line"),
   cor.method = "spearman",

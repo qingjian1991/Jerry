@@ -48,7 +48,7 @@
 #'
 #' @export
 
-ggpoints = function(data = NULL, x, y, xlab = NULL, ylab = NULL,
+ggpoints = function(data = NULL, x, y,
                     annotations = c("lm","cor"),
                     linetypes = c("xy.line", "lm.line"),
                     cor.method = "spearman",
@@ -70,6 +70,7 @@ ggpoints = function(data = NULL, x, y, xlab = NULL, ylab = NULL,
       y = y
     )
   }else{
+    data = as.data.frame()
     data$x = data[,x]
     data$y = data[,y]
   }
@@ -93,8 +94,7 @@ ggpoints = function(data = NULL, x, y, xlab = NULL, ylab = NULL,
   p1 = data %>%
     ggplot(aes(x = x, y = y ) ) + ggpubr::theme_pubr() +
     geom_point(pch=point.pch , fill= point.fill,
-               size= point.size, color = point.col )+
-    labs(x = xlab, y = ylab)
+               size= point.size, color = point.col )
 
   if("xy.line" %in% linetypes){
     p1 = p1+
