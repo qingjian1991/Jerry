@@ -10,6 +10,7 @@ plot_survival_nominal(
   time = "time",
   status = "status",
   palette = NULL,
+  ylab = "Overall Survival (OS)",
   return.data = TRUE,
   ...
 )
@@ -24,6 +25,8 @@ plot_survival_nominal(
 \item{status}{columns names specifying status.}
 
 \item{palette}{colors for different groups.}
+
+\item{ylab}{Default: Overall Survival (OS)}
 
 \item{return.data}{whether return the data frame, Default is FALSE.}
 

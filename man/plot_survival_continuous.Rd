@@ -11,6 +11,7 @@ plot_survival_continuous(
   time = "time",
   status = "status",
   palette = NULL,
+  ylab = "Overall Survival (OS)",
   minprop = 0.4,
   return.data = FALSE,
   ...
@@ -28,6 +29,8 @@ plot_survival_continuous(
 \item{status}{columns names specifying status.}
 
 \item{palette}{colors for different groups.}
+
+\item{ylab}{Default: Overall Survival (OS)}
 
 \item{minprop}{Setting minprop values if cutoff methods is "best"}
 
