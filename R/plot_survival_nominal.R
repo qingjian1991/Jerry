@@ -7,6 +7,7 @@
 #' @param time columns names specifying time.
 #' @param status columns names specifying status.
 #' @param palette colors for different groups.
+#' @param ylab Default: Overall Survival (OS)
 #' @param return.data whether return the data frame, Default is FALSE.
 #' @param ... parameters from survminer::ggsurvplot() to control the styles of figures
 #'
@@ -30,6 +31,7 @@ plot_survival_nominal = function(data,
                                  time = "time",
                                  status = "status",
                                  palette = NULL,
+                                 ylab = "Overall Survival (OS)",
                                  return.data = TRUE,
                                  ...
 ){
@@ -65,7 +67,7 @@ plot_survival_nominal = function(data,
                           pval = TRUE,
                           palette = palette,
                           #legend.labs = c("High","Low"),
-                          ylab = "Overall Survival (OS)",
+                          ylab = ylab,
                           #conf.int = TRUE, # Add confidence interval
                           ncensor.plot = FALSE,
                           ...

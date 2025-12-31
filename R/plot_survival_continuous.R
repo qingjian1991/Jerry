@@ -8,6 +8,7 @@
 #' @param minprop Setting minprop values if cutoff methods is "best"
 #' @param time columns names specifying time.
 #' @param status columns names specifying status.
+#' @param ylab Default: Overall Survival (OS)
 #' @param palette colors for different groups.
 #' @param return.data whether return the data frame, Default is FALSE.
 #' @param ... parameters from survminer::ggsurvplot() to control the styles of figures
@@ -80,6 +81,7 @@ plot_survival_continuous = function(data,
                          time = "time",
                          status = "status",
                          palette = NULL,
+                         ylab = "Overall Survival (OS)",
                          minprop = 0.4,
                          return.data = FALSE,
                          ...
@@ -169,7 +171,7 @@ plot_survival_continuous = function(data,
                                        pval = TRUE,
                                        palette = palette,
                                        #legend.labs = c("High","Low"),
-                                       ylab = "Overall Survival (OS)",
+                                       ylab = ylab,
                                        #conf.int = TRUE, # Add confidence interval
                                        ncensor.plot = FALSE,
                                        ...
